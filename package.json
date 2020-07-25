@@ -15,6 +15,9 @@
     "convert",
     "mapping"
   ],
+  "repository": {
+    "url": "git@github.com:compit-ltd/json-deep-coerce.git"
+  },
   "author": "Eli goldberg",
   "license": "MIT",
   "devDependencies": {
