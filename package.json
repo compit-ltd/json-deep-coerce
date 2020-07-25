@@ -1,7 +1,7 @@
 {
   "name": "@compit/json-deep-coerce",
   "version": "0.0.1",
-  "description": "",
+  "description": "Deeply converts (coerces) a Json object to specified types via a mapping",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

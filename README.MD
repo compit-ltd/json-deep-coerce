@@ -1,6 +1,6 @@
 # Json Deep Coerce
 
-##  Collects a json schema by inspecting multiple json objects
+##  Deeply converts (coerces) a Json object to specified types via a mapping
 
 ## Usage
 
