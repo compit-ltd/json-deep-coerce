@@ -4,10 +4,45 @@ type MappingObject = {
 };
 
 export const empty = (obj: unknown): boolean => obj === undefined || obj === null;
-export const intParser: Parser<number> = (val) => empty(val) ? val : Number(val);
-export const floatParser: Parser<number> = (val) => empty(val) ? val : parseFloat(val.toString());
-export const boolParser: Parser<boolean> = (val) => empty(val) ? val : !!val;
+export const isValidDate = (date: Date) => date.toString() !== "Invalid Date";
+export const intParser: Parser<number> = (val) => {
+  if (empty(val)) return val;
+  if (val === '') return undefined;
+  else {
+    const num = Number(val);
+    if (isNaN(num)) return null;
+    return Math.trunc(num);
+  };
+};
+export const floatParser: Parser<number> = (val) => {
+  if (empty(val)) return val;
+  if (val === '') return undefined;
+  else {
+    const num = parseFloat(val.toString());
+    if (isNaN(num)) return null;
+    return num;
+  };
+}
+export const boolParser: Parser<boolean> = (val) => {
+  if (empty(val)) return val;
+  if (typeof val === 'string') {
+    const formatted = val.toLowerCase().trim();
+    if (formatted === 'null' || formatted === 'undefined') return undefined;
+    return formatted === 'true' || formatted === '1';
+  }
+  const bool = Boolean(val);
+  return bool;
+};
+
+export const dateParser: Parser<boolean> = (val) => {
+  if (empty(val)) return val;
+
+  const date = new Date(val);
+  return isValidDate(date) ? date : undefined;
+};
+
 export const stringParser: Parser<string> = (val) => empty(val) ? val : val.toString();
+
 export function arrParser<T>(itemParser: Parser<T>): Parser<T[]> {
   return (val: unknown[]): T[] => (empty(val) || !val.length) ? val as T[] : val.map(itemParser);
 }
