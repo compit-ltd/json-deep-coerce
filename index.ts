@@ -43,6 +43,17 @@ export const dateParser: Parser<boolean> = (val) => {
 
 export const stringParser: Parser<string> = (val) => empty(val) ? val : val.toString();
 
+export const enumParser = (values: string[]) => {
+  const possibleFieldSet = new Set(values);
+  return (val: any) => {
+    if (empty(val)) return val;
+
+    if (!possibleFieldSet.has(val.toString())) return undefined;
+
+    return val;
+  }
+};
+
 export function arrParser<T>(itemParser: Parser<T>): Parser<T[]> {
   return (val: unknown[]): T[] => (empty(val) || !val.length) ? val as T[] : val.map(itemParser);
 }
